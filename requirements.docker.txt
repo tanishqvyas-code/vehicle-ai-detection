@@ -1,0 +1,12 @@
+# CPU-only build — avoids downloading CUDA/NVIDIA packages (~2 GB saved)
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+ultralytics>=8.0.0
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+opencv-python-headless>=4.9.0
+pillow>=10.0.0
+numpy>=1.24.0
+scipy>=1.11.0
+python-dotenv>=1.0.0

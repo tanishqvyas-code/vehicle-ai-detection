@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VehicleAI — Traffic Detection Dashboard</title>
-  <meta name="description" content="Real-time YOLO-powered vehicle detection and counting system. Upload images or videos to detect cars, buses, trucks, and more." />
+  <meta name="description"
+    content="Real-time YOLO-powered vehicle detection and counting system. Upload images or videos to detect cars, buses, trucks, and more." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <!-- ── Sidebar ──────────────────────────────────────────────────────────── -->
@@ -40,7 +44,8 @@
     <div class="sidebar-section">
       <label class="setting-label">Confidence Threshold</label>
       <div class="slider-row">
-        <input type="range" id="conf-slider" min="5" max="95" value="35" class="range-slider" oninput="updateConf(this.value)" />
+        <input type="range" id="conf-slider" min="5" max="95" value="35" class="range-slider"
+          oninput="updateConf(this.value)" />
         <span class="conf-val" id="conf-label">35%</span>
       </div>
     </div>
@@ -79,10 +84,8 @@
 
     <!-- ── IMAGE TAB ─────────────────────────────────────────────────────── -->
     <section class="tab-panel active" id="tab-image">
-      <div class="upload-zone" id="image-drop-zone"
-           ondragover="handleDragOver(event)"
-           ondragleave="handleDragLeave(event, 'image-drop-zone')"
-           ondrop="handleDrop(event, 'image')">
+      <div class="upload-zone" id="image-drop-zone" ondragover="handleDragOver(event)"
+        ondragleave="handleDragLeave(event, 'image-drop-zone')" ondrop="handleDrop(event, 'image')">
         <div class="upload-inner">
           <div class="upload-icon">📁</div>
           <p class="upload-title">Drop image here or <label for="image-input" class="upload-link">browse</label></p>
@@ -123,10 +126,8 @@
 
     <!-- ── VIDEO TAB ─────────────────────────────────────────────────────── -->
     <section class="tab-panel" id="tab-video">
-      <div class="upload-zone" id="video-drop-zone"
-           ondragover="handleDragOver(event)"
-           ondragleave="handleDragLeave(event, 'video-drop-zone')"
-           ondrop="handleDrop(event, 'video')">
+      <div class="upload-zone" id="video-drop-zone" ondragover="handleDragOver(event)"
+        ondragleave="handleDragLeave(event, 'video-drop-zone')" ondrop="handleDrop(event, 'video')">
         <div class="upload-inner">
           <div class="upload-icon">🎬</div>
           <p class="upload-title">Drop video here or <label for="video-input" class="upload-link">browse</label></p>
@@ -197,6 +198,8 @@
   <!-- ── Toast ────────────────────────────────────────────────────────────── -->
   <div class="toast-container" id="toast-container"></div>
 
+  <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>

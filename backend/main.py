@@ -138,6 +138,11 @@ def serve_index():
         return FileResponse(str(index))
     return JSONResponse({"error": "Frontend not found"}, status_code=404)
 
+@app.get("/config.js")
+def serve_config():
+    f = FRONTEND_DIR / "config.js"
+    return FileResponse(str(f), media_type="application/javascript")
+
 @app.get("/style.css")
 def serve_css():
     f = FRONTEND_DIR / "style.css"

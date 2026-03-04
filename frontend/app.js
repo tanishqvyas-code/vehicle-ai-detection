@@ -4,28 +4,29 @@
  */
 
 // ── Config ─────────────────────────────────────────────────────────────────────
-const API_BASE = window.location.origin;
-let currentConf = 0.35;
-let webcamActive = false;
-let lastImageB64 = null;
+// API_BASE is injected by config.js (auto-set per environment).
+// On Vercel → points to the Render backend URL.
+// Locally   → http://localhost:8000
+const API_BASE = (window.VEHICLEAI_API_URL || window.location.origin).replace(/\/$/, "");
+
 
 // Class metadata for display
 const CLASS_META = {
-  car:               { icon: "🚗", label: "Car",         color: "#00d2ff" },
-  two_wheeler:       { icon: "🏍️", label: "Two Wheeler", color: "#ffa500" },
-  auto:              { icon: "🛺", label: "Auto",         color: "#32cd32" },
-  bus:               { icon: "🚌", label: "Bus",          color: "#dc143c" },
-  truck:             { icon: "🚛", label: "Truck",        color: "#9400d3" },
-  number_plate:      { icon: "🔖", label: "Number Plate", color: "#888"    },
-  blur_number_plate: { icon: "🔖", label: "Blur Plate",   color: "#555"    },
+  car: { icon: "🚗", label: "Car", color: "#00d2ff" },
+  two_wheeler: { icon: "🏍️", label: "Two Wheeler", color: "#ffa500" },
+  auto: { icon: "🛺", label: "Auto", color: "#32cd32" },
+  bus: { icon: "🚌", label: "Bus", color: "#dc143c" },
+  truck: { icon: "🚛", label: "Truck", color: "#9400d3" },
+  number_plate: { icon: "🔖", label: "Number Plate", color: "#888" },
+  blur_number_plate: { icon: "🔖", label: "Blur Plate", color: "#555" },
 };
 
 
 // ── Tab Management ─────────────────────────────────────────────────────────────
 const TAB_META = {
-  image:  { title: "Image Detection",  sub: "Upload an image to detect and count vehicles" },
-  video:  { title: "Video Detection",  sub: "Upload a video — unique vehicles counted via tracking" },
-  webcam: { title: "Live Webcam",      sub: "Real-time detection from your camera" },
+  image: { title: "Image Detection", sub: "Upload an image to detect and count vehicles" },
+  video: { title: "Video Detection", sub: "Upload a video — unique vehicles counted via tracking" },
+  webcam: { title: "Live Webcam", sub: "Real-time detection from your camera" },
 };
 
 function switchTab(tab) {
@@ -39,7 +40,7 @@ function switchTab(tab) {
 
   // Update topbar
   document.getElementById("page-title").textContent = TAB_META[tab].title;
-  document.getElementById("page-sub").textContent   = TAB_META[tab].sub;
+  document.getElementById("page-sub").textContent = TAB_META[tab].sub;
 
   // Stop webcam if switching away
   if (tab !== "webcam" && webcamActive) stopWebcam();
@@ -232,7 +233,7 @@ function stopWebcam() {
 // ── UI helpers ─────────────────────────────────────────────────────────────────
 
 function renderCountGrid(gridId, counts) {
-  const grid  = document.getElementById(gridId);
+  const grid = document.getElementById(gridId);
   grid.innerHTML = "";
 
   if (!counts || Object.keys(counts).length === 0) {
@@ -245,8 +246,8 @@ function renderCountGrid(gridId, counts) {
   Object.entries(counts)
     .sort((a, b) => b[1] - a[1])
     .forEach(([cls, count], i) => {
-      const meta  = CLASS_META[cls] || { icon: "🚘", label: cls, color: "#888" };
-      const pct   = (count / max) * 100;
+      const meta = CLASS_META[cls] || { icon: "🚘", label: cls, color: "#888" };
+      const pct = (count / max) * 100;
 
       const item = document.createElement("div");
       item.className = "count-item";
@@ -273,8 +274,8 @@ function renderCountGrid(gridId, counts) {
 }
 
 function animateNumber(elId, from, to) {
-  const el  = document.getElementById(elId);
-  const dur  = 700;
+  const el = document.getElementById(elId);
+  const dur = 700;
   const start = performance.now();
 
   function step(now) {
@@ -297,7 +298,7 @@ function showProgressBar(type, show) {
 }
 
 function animateProgress(barId, from, to, duration) {
-  const bar   = document.getElementById(barId);
+  const bar = document.getElementById(barId);
   const start = performance.now();
   function step(now) {
     const t = Math.min((now - start) / duration, 1);
@@ -312,28 +313,28 @@ function setStatus(text, active) {
   const pulse = document.querySelector("#status-pill .pulse");
   if (active) {
     pulse.style.background = "var(--warning)";
-    pulse.style.boxShadow  = "0 0 0 0 rgba(245,158,11,0.6)";
+    pulse.style.boxShadow = "0 0 0 0 rgba(245,158,11,0.6)";
   } else {
     pulse.style.background = "var(--success)";
-    pulse.style.boxShadow  = "0 0 0 0 rgba(34,197,94,0.6)";
+    pulse.style.boxShadow = "0 0 0 0 rgba(34,197,94,0.6)";
   }
 }
 
-function showEl(id)  { document.getElementById(id).classList.remove("hidden"); }
-function hideEl(id)  { document.getElementById(id).classList.add("hidden"); }
+function showEl(id) { document.getElementById(id).classList.remove("hidden"); }
+function hideEl(id) { document.getElementById(id).classList.add("hidden"); }
 
 function showToast(msg, type = "info") {
-  const icons   = { success: "✅", error: "❌", info: "ℹ️" };
+  const icons = { success: "✅", error: "❌", info: "ℹ️" };
   const container = document.getElementById("toast-container");
 
-  const toast   = document.createElement("div");
+  const toast = document.createElement("div");
   toast.className = `toast ${type}`;
   toast.innerHTML = `<span>${icons[type]}</span><span>${msg}</span>`;
   container.appendChild(toast);
 
   setTimeout(() => {
-    toast.style.opacity    = "0";
-    toast.style.transform  = "translateX(30px)";
+    toast.style.opacity = "0";
+    toast.style.transform = "translateX(30px)";
     toast.style.transition = "all 0.3s ease";
     setTimeout(() => toast.remove(), 300);
   }, 3500);
