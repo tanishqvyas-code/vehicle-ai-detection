@@ -1,0 +1,15 @@
+
+path: /root/.cache/kagglehub/datasets/saumyapatel/traffic-vehicles-object-detection/versions/1/Traffic Dataset
+
+train: images/train
+val: images/val
+
+nc: 7
+names:
+  - car
+  - number_plate
+  - blur_number_plate
+  - two_wheeler
+  - auto
+  - bus
+  - truck
