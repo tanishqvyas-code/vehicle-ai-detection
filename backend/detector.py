@@ -76,6 +76,7 @@ def detect_image(image_bytes: bytes, conf: float = DEFAULT_CONFIDENCE) -> dict:
         imgsz=IMG_SIZE,
         save=False,
         verbose=False,
+        agnostic_nms=True,
     )
     latency = (time.perf_counter() - t0) * 1000
 
@@ -143,6 +144,7 @@ def detect_video(
             imgsz=IMG_SIZE,
             save=False,
             verbose=False,
+            agnostic_nms=True,
         )
 
         # Tracker update
@@ -214,7 +216,7 @@ def webcam_stream(conf: float = DEFAULT_CONFIDENCE):
             if not ret:
                 break
 
-            results  = model.predict(source=frame, conf=conf, save=False, verbose=False)
+            results  = model.predict(source=frame, conf=conf, imgsz=IMG_SIZE, save=False, verbose=False, agnostic_nms=True)
             annotated = draw_boxes(frame, results, conf_threshold=conf)
             jpg_bytes = frame_to_bytes(annotated)
 

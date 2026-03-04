@@ -15,13 +15,13 @@ except ImportError:
 # ── Paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).parent.parent.resolve()
 
-MODEL_PATH          = os.environ.get("MODEL_PATH",          str(BASE_DIR / "best.pt"))
-FALLBACK_MODEL_PATH = os.environ.get("FALLBACK_MODEL_PATH", str(BASE_DIR / "yolov8n.pt"))
+MODEL_PATH          = os.environ.get("MODEL_PATH",          str(BASE_DIR / "best.onnx"))
+FALLBACK_MODEL_PATH = os.environ.get("FALLBACK_MODEL_PATH", str(BASE_DIR / "yolov8n.onnx"))
 
 # ── Inference ──────────────────────────────────────────────────────────────────
 DEFAULT_CONFIDENCE = float(os.environ.get("CONFIDENCE", "0.35"))
 DEFAULT_IOU        = float(os.environ.get("IOU",        "0.45"))
-IMG_SIZE           = int(os.environ.get("IMG_SIZE",     "640"))
+IMG_SIZE           = int(os.environ.get("IMG_SIZE",     "416"))
 
 # ── Class definitions ──────────────────────────────────────────────────────────
 CLASS_NAMES = [
