@@ -1,5 +1,9 @@
 # VehicleAI — Real-Time Vehicle Detection & Counting
 
+[![Deploy Backend to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/tanishqvyas-code/vehicle-ai-detection)
+
+[![Frontend on Vercel](https://img.shields.io/badge/Frontend-Vercel-black?logo=vercel)](https://vehicleai-frontend-de14r8kij-tanishqvyas322-3778s-projects.vercel.app)
+
 A production-ready, full-stack vehicle detection and counting system powered by **YOLOv8** with a custom-trained 7-class traffic model.
 
 ![Dashboard](frontend/preview.png)
