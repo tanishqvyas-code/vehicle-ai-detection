@@ -25,7 +25,6 @@ COPY --from=builder /install /usr/local
 
 COPY backend/   ./backend/
 COPY frontend/  ./frontend/
-COPY best.pt    ./
 
 RUN mkdir -p backend/outputs
 
