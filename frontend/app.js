@@ -343,9 +343,36 @@ function showToast(msg, type = "info") {
 
 // ── Init ───────────────────────────────────────────────────────────────────────
 (function init() {
-  // Verify API is reachable
+  const statusEl = document.getElementById("status-text");
+  const pulse = document.querySelector("#status-pill .pulse");
+
+  // Set initial "Connecting" state
+  statusEl.textContent = "Connecting...";
+  pulse.style.background = "var(--warning)";
+
+  // Start health check
+  const start = Date.now();
+
+  // Show "Waking up" if it takes > 3s
+  const wakeUpTimer = setTimeout(() => {
+    showToast("Server is waking up... Please wait (up to 1 min)", "info");
+    statusEl.textContent = "Waking up...";
+  }, 3000);
+
   fetch(`${API_BASE}/api/health`)
-    .then(r => r.json())
-    .then(() => showToast("Connected to detection server", "success"))
-    .catch(() => showToast("Cannot reach server — make sure backend is running on port 8000", "error"));
+    .then(r => {
+      clearTimeout(wakeUpTimer);
+      if (!r.ok) throw new Error("Server error");
+      return r.json();
+    })
+    .then(() => {
+      showToast("Connected to detection server", "success");
+      setStatus("Ready", false);
+    })
+    .catch(() => {
+      clearTimeout(wakeUpTimer);
+      showToast("Cannot reach server — make sure backend is running", "error");
+      statusEl.textContent = "Disconnected";
+      pulse.style.background = "#ef4444";
+    });
 })();
