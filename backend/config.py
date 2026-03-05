@@ -15,8 +15,8 @@ except ImportError:
 # ── Paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).parent.parent.resolve()
 
-MODEL_PATH          = os.environ.get("MODEL_PATH",          str(BASE_DIR / "best.onnx"))
-FALLBACK_MODEL_PATH = os.environ.get("FALLBACK_MODEL_PATH", str(BASE_DIR / "yolov8n.onnx"))
+MODEL_PATH          = os.environ.get("MODEL_PATH",          str(BASE_DIR / "backend" / "models" / "best.onnx"))
+FALLBACK_MODEL_PATH = os.environ.get("FALLBACK_MODEL_PATH", str(BASE_DIR / "backend" / "models" / "yolov8n.onnx"))
 
 # ── Inference ──────────────────────────────────────────────────────────────────
 DEFAULT_CONFIDENCE = float(os.environ.get("CONFIDENCE", "0.35"))
