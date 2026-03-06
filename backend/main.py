@@ -135,28 +135,29 @@ def api_stream(conf: float = Query(DEFAULT_CONFIDENCE, ge=0.05, le=1.0)):
         raise HTTPException(status_code=503, detail=str(e))
 
 
-# ── Frontend — explicit routes so API is never shadowed ───────────────────────
+NO_CACHE = {"Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache"}
+
 @app.get("/")
 def serve_index():
     index = FRONTEND_DIR / "index.html"
     if index.exists():
-        return FileResponse(str(index))
+        return FileResponse(str(index), headers=NO_CACHE)
     return JSONResponse({"error": "Frontend not found"}, status_code=404)
 
 @app.get("/config.js")
 def serve_config():
     f = FRONTEND_DIR / "config.js"
-    return FileResponse(str(f), media_type="application/javascript")
+    return FileResponse(str(f), media_type="application/javascript", headers=NO_CACHE)
 
 @app.get("/style.css")
 def serve_css():
     f = FRONTEND_DIR / "style.css"
-    return FileResponse(str(f), media_type="text/css")
+    return FileResponse(str(f), media_type="text/css", headers=NO_CACHE)
 
 @app.get("/app.js")
 def serve_js():
     f = FRONTEND_DIR / "app.js"
-    return FileResponse(str(f), media_type="application/javascript")
+    return FileResponse(str(f), media_type="application/javascript", headers=NO_CACHE)
 
 
 # ── Entry point ────────────────────────────────────────────────────────────────
