@@ -11,9 +11,15 @@ services:
       - key: PYTHON_VERSION
         value: "3.10.14"
       - key: CONFIDENCE
-        value: "0.35"
+        value: "0.30"
+      - key: IOU
+        value: "0.40"
+      - key: IMG_SIZE
+        value: "640"
       - key: MODEL_PATH
-        value: "best.pt"
+        value: "/opt/render/project/src/backend/models/best.pt"
+      - key: FALLBACK_MODEL_PATH
+        value: "/opt/render/project/src/backend/models/yolov8n.pt"
       - key: OUTPUT_VIDEO_DIR
         value: "backend/outputs"
     disk:
