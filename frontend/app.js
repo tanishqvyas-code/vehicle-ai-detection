@@ -10,6 +10,12 @@
 const API_BASE = (window.VEHICLEAI_API_URL || window.location.origin).replace(/\/$/, "");
 
 
+// ── Global State ─────────────────────────────────────────────────────────────
+let currentConf = 0.30;
+let webcamActive = false;
+let lastImageB64 = null;
+
+
 // Class metadata for display
 const CLASS_META = {
   car: { icon: "🚗", label: "Car", color: "#00d2ff" },

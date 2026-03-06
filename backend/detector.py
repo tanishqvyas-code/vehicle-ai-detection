@@ -74,9 +74,12 @@ def detect_image(image_bytes: bytes, conf: float = DEFAULT_CONFIDENCE) -> dict:
         conf=conf,
         iou=DEFAULT_IOU,
         imgsz=IMG_SIZE,
+        augment=True,        # Test-time augmentation: multi-scale + flip merging
+        max_det=300,         # Allow up to 300 detections for dense traffic
         save=False,
         verbose=False,
         agnostic_nms=True,
+        half=False,          # CPU-safe (set True only if CUDA is available)
     )
     latency = (time.perf_counter() - t0) * 1000
 
@@ -142,9 +145,11 @@ def detect_video(
             conf=conf,
             iou=DEFAULT_IOU,
             imgsz=IMG_SIZE,
+            max_det=300,
             save=False,
             verbose=False,
             agnostic_nms=True,
+            half=False,
         )
 
         # Tracker update
@@ -216,7 +221,7 @@ def webcam_stream(conf: float = DEFAULT_CONFIDENCE):
             if not ret:
                 break
 
-            results  = model.predict(source=frame, conf=conf, imgsz=IMG_SIZE, save=False, verbose=False, agnostic_nms=True)
+            results  = model.predict(source=frame, conf=conf, imgsz=IMG_SIZE, max_det=300, save=False, verbose=False, agnostic_nms=True, half=False)
             annotated = draw_boxes(frame, results, conf_threshold=conf)
             jpg_bytes = frame_to_bytes(annotated)
 

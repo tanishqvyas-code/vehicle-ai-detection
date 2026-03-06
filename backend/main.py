@@ -10,7 +10,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, File, UploadFile, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse, FileResponse, JSONResponse
+from fastapi.responses import StreamingResponse, FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 # Allow imports from backend/ directory
@@ -49,6 +49,11 @@ app.mount("/outputs", StaticFiles(directory=str(OUTPUT_DIR)), name="outputs")
 @app.get("/api/health")
 def health():
     return {"status": "ok", "message": "Vehicle Detection API is running"}
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return Response(status_code=204)
 
 
 # ── Image detection ────────────────────────────────────────────────────────────
