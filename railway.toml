@@ -10,7 +10,7 @@ restartPolicyMaxRetries = 3
 [environments.production.variables]
 CONFIDENCE = "0.30"
 IOU = "0.40"
-IMG_SIZE = "640"
-MODEL_PATH = "backend/models/best.pt"
-FALLBACK_MODEL_PATH = "backend/models/yolov8n.pt"
+IMG_SIZE = "384"
+MODEL_PATH = "backend/models/best.onnx"
+FALLBACK_MODEL_PATH = "backend/models/yolov8n.onnx"
 OUTPUT_VIDEO_DIR = "backend/outputs"

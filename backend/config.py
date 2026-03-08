@@ -15,17 +15,17 @@ except ImportError:
 # ── Paths ──────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).parent.parent.resolve()
 
-_model_env      = os.environ.get("MODEL_PATH",          "backend/models/best.pt")
-_fallback_env   = os.environ.get("FALLBACK_MODEL_PATH", "backend/models/yolov8n.pt")
+_model_env      = os.environ.get("MODEL_PATH",          "backend/models/best.onnx")
+_fallback_env   = os.environ.get("FALLBACK_MODEL_PATH", "backend/models/yolov8n.onnx")
 
 # Resolve relative paths against repo root; absolute env-var paths work as-is
 MODEL_PATH          = str(BASE_DIR / _model_env)   if not os.path.isabs(_model_env)   else _model_env
 FALLBACK_MODEL_PATH = str(BASE_DIR / _fallback_env) if not os.path.isabs(_fallback_env) else _fallback_env
 
 # ── Inference ──────────────────────────────────────────────────────────────────
-DEFAULT_CONFIDENCE = float(os.environ.get("CONFIDENCE", "0.30"))
+DEFAULT_CONFIDENCE = float(os.environ.get("CONFIDENCE", "0.20"))
 DEFAULT_IOU        = float(os.environ.get("IOU",        "0.40"))
-IMG_SIZE           = int(os.environ.get("IMG_SIZE",     "640"))
+IMG_SIZE           = int(os.environ.get("IMG_SIZE",     "384"))
 
 # ── Class definitions ──────────────────────────────────────────────────────────
 CLASS_NAMES = [

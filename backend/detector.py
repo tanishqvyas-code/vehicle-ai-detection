@@ -74,12 +74,12 @@ def detect_image(image_bytes: bytes, conf: float = DEFAULT_CONFIDENCE) -> dict:
         conf=conf,
         iou=DEFAULT_IOU,
         imgsz=IMG_SIZE,
-        augment=True,        # Test-time augmentation: multi-scale + flip merging
+        augment=False,       # Disabled TTA to meet 50-70ms target
         max_det=300,         # Allow up to 300 detections for dense traffic
         save=False,
         verbose=False,
         agnostic_nms=True,
-        half=False,          # CPU-safe (set True only if CUDA is available)
+        half=False,          # CPU-safe
     )
     latency = (time.perf_counter() - t0) * 1000
 

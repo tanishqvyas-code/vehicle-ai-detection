@@ -11,7 +11,7 @@ const API_BASE = (window.VEHICLEAI_API_URL || window.location.origin).replace(/\
 
 
 // ── Global State ─────────────────────────────────────────────────────────────
-let currentConf = 0.30;
+let currentConf = 0.10;
 let webcamActive = false;
 let lastImageB64 = null;
 
